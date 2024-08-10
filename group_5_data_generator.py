@@ -15,7 +15,7 @@ class SensorSimulator:
         self.cycle = random.randint(self.min_cycle, self.max_cycle)
         self.half_cycle = self.cycle / 2
         self.squiggle = squiggle == 'True'
-        random.seed("COMP216Group3")
+        random.seed("COMP216Group5")
 
     def _generate_normalized_value(self):
         """Generate a normalized value with randomness and noise."""
