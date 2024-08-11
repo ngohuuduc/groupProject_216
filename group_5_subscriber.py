@@ -1,9 +1,12 @@
 from tkinter import *
-from tkinter import Tk, Canvas, Frame, W
 from tkinter import messagebox
 from tkinter.ttk import *
 import paho.mqtt.client as mqtt
 import json
+import smtplib
+from email.mime.text import MIMEText
+from random import randint
+import time
 
 class TempClient(Tk):
     def __init__(self):
@@ -27,9 +30,22 @@ class TempClient(Tk):
         mqttc.on_unsubscribe = self.on_unsubscribed
         self.__mqttc = mqttc
 
+    def send_email_notification(self, subject, message):
+        sender_email = 'tungnamneet@gmail.com'
+        receiver_email = 'namneettung123@gmail.com'
+        password = 'kbwqypczdwdetvdn'
+        
+        msg = MIMEText(message)
+        msg['Subject'] = subject
+        msg['From'] = sender_email
+        msg['To'] = receiver_email
+        
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+            server.login(sender_email, password)
+            server.send_message(msg)
+
     def on_disconnect(self, mqttc, userdata, rc, properties=None):
         print('Disconnected.. \n Return code: ' + str(rc))
-
 
     def on_unsubscribed(self, mqttc, userdata, mid, granted_qos):
         print('Unsubscribed')
@@ -41,6 +57,10 @@ class TempClient(Tk):
             print('Missing Detected!')
             miss = self.__missing.get()
             self.__missing.set(miss + 1)
+            self.send_email_notification(
+                'Missing Data Alert',
+                f'Missing data detected. Packet ID: {packetId}'
+            )
 
         self.__lastReceived = packetId
 
@@ -49,8 +69,12 @@ class TempClient(Tk):
             print('Wild Detected!')
             wild = self.__wild.get()
             self.__wild.set(wild + 1)
+            self.send_email_notification(
+                'Wild Data Alert',
+                f'Wild data detected. Temperature: {newTemp}'
+            )
             return
-        
+
         if(len(self.__data) >= 20):
             self.__data.pop(0)
 
@@ -101,7 +125,8 @@ class TempClient(Tk):
         topicOptions = Combobox(container, values=self.__sensors_name, textvariable=self.__sensorName, width=10)
         topicOptions.place(relx=0.7, rely=0.85)
         topicOptions.current(0)
-        self.startButton = Button(textvariable=self.__button_name, command=self.btn_on_click).place(relx=0.83, rely=0.82)
+        self.startButton = Button(container, textvariable=self.__button_name, command=self.btn_on_click)
+        self.startButton.place(relx=0.83, rely=0.82)
         # Initialize Canvas
         self.canv = Canvas(self)
         self.canv.place(relx=0.05, rely=0.24, width=500, height=180)
@@ -130,7 +155,6 @@ class TempClient(Tk):
         print('Connected.. \n Return code: ' + str(rc))
         mqttc.subscribe(topic=self.__sensorName.get(), qos=0)
 
-
     def on_message(self, mqttc, userdata, msg):
         message = json.loads(msg.payload)
         self.__packetId.set(message['packetId'])
@@ -142,11 +166,7 @@ class TempClient(Tk):
     def on_subscribe(self, mqttc, userdata, mid, granted_qos, properties=None):
         print('Subscribed')
 
-    
     def displayLines(self):
-        self.canv = Canvas(self)
-        self.canv.place(relx=0.1, rely=0.24, width=500, height=180)
-
         lineHeight = 10
         textDisplay = 22
         for _ in range(4):
@@ -175,6 +195,12 @@ class TempClient(Tk):
             spacing += 20
             prevY = height
 
+    def simulate_missing_data(self):
+        # Function to occasionally skip blocks of transmissions
+        if randint(0, 10) > 7:  # Roughly 30% chance to skip
+            time.sleep(2)  # Simulate delay in receiving data
+
 if __name__ == '__main__':
     sts = TempClient()
     sts.mainloop()
+
