@@ -1051,3 +1051,29 @@
 2024-08-11 13:15:57,800 - INFO - Published message: {'packetId': 1723396557800, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 19.008643279985108, 'interval': 0.25}
 2024-08-11 13:15:57,848 - INFO - Published message. MID: 288, Reason: Success
 2024-08-11 13:15:57,849 - INFO - Published message: {'packetId': 1723396557848, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 20.617981426161467, 'interval': 0.25}
+2024-08-11 13:15:57,944 - INFO - Published message. MID: 117, Reason: Success
+2024-08-11 13:15:57,944 - INFO - Published message: {'packetId': 1723396557944, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 20.66137133787335, 'interval': 0.25}
+2024-08-11 13:15:58,051 - INFO - Published message. MID: 122, Reason: Success
+2024-08-11 13:15:58,052 - INFO - Published message: {'packetId': 1723396558050, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 18.46028307960901, 'interval': 0.25}
+2024-08-11 13:15:58,099 - INFO - Published message. MID: 289, Reason: Success
+2024-08-11 13:15:58,100 - INFO - Published message: {'packetId': 1723396558099, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 20.03406674160285, 'interval': 0.25}
+2024-08-11 13:15:58,195 - INFO - Published message. MID: 118, Reason: Success
+2024-08-11 13:15:58,195 - INFO - Published message: {'packetId': 1723396558195, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 20.20477822414909, 'interval': 0.25}
+2024-08-11 13:15:58,302 - INFO - Published message. MID: 123, Reason: Success
+2024-08-11 13:15:58,303 - INFO - Published message: {'packetId': 1723396558302, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 18.087396371483457, 'interval': 0.25}
+2024-08-11 13:15:58,350 - INFO - Published message. MID: 290, Reason: Success
+2024-08-11 13:15:58,351 - INFO - Published message: {'packetId': 1723396558350, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 19.2964357662057, 'interval': 0.25}
+2024-08-11 13:15:58,446 - INFO - Published message. MID: 119, Reason: Success
+2024-08-11 13:15:58,446 - INFO - Published message: {'packetId': 1723396558446, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 19.611047464659606, 'interval': 0.25}
+2024-08-11 13:15:58,554 - INFO - Published message. MID: 124, Reason: Success
+2024-08-11 13:15:58,555 - INFO - Published message: {'packetId': 1723396558553, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 18.64618071236271, 'interval': 0.25}
+2024-08-11 13:15:58,601 - INFO - Published message. MID: 291, Reason: Success
+2024-08-11 13:15:58,602 - INFO - Published message: {'packetId': 1723396558601, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 19.685875848498664, 'interval': 0.25}
+2024-08-11 13:15:58,697 - INFO - Published message. MID: 120, Reason: Success
+2024-08-11 13:15:58,698 - INFO - Published message: {'packetId': 1723396558697, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 20.01254495767477, 'interval': 0.25}
+2024-08-11 13:15:58,805 - INFO - Published message. MID: 125, Reason: Success
+2024-08-11 13:15:58,806 - INFO - Published message: {'packetId': 1723396558805, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 19.412424323558135, 'interval': 0.25}
+2024-08-11 13:15:58,853 - INFO - Published message. MID: 292, Reason: Success
+2024-08-11 13:15:58,853 - INFO - Published message: {'packetId': 1723396558852, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 20.468950824728708, 'interval': 0.25}
+2024-08-11 13:15:58,948 - INFO - Published message. MID: 121, Reason: Success
+2024-08-11 13:15:58,949 - INFO - Published message: {'packetId': 1723396558948, 'name': 'Play Room', 'ipv4': '123.89.46.65', 'temp': 20.465663497168993, 'interval': 0.25}
