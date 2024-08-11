@@ -7,6 +7,19 @@ import smtplib
 from email.mime.text import MIMEText
 from random import randint
 import time
+import os
+from dotenv import load_dotenv
+import logging
+
+load_dotenv()
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG, 
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    handlers=[
+                        logging.StreamHandler(),  # Logs to console
+                        logging.FileHandler("Subscriber.log")  # Logs to file
+                    ])
 
 class TempClient(Tk):
     def __init__(self):
@@ -31,48 +44,61 @@ class TempClient(Tk):
         self.__mqttc = mqttc
 
     def send_email_notification(self, subject, message):
-        sender_email = 'tungnamneet@gmail.com'
-        receiver_email = 'namneettung123@gmail.com'
-        password = 'kbwqypczdwdetvdn'
-        
-        msg = MIMEText(message)
-        msg['Subject'] = subject
-        msg['From'] = sender_email
-        msg['To'] = receiver_email
-        
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-            server.login(sender_email, password)
-            server.send_message(msg)
+        try:
+            sender_email = os.getenv('SENDER_EMAIL')
+            receiver_email = os.getenv('RECEIVER_EMAIL')
+            password = os.getenv('EMAIL_PASSWORD')
+            
+            msg = MIMEText(message)
+            msg['Subject'] = subject
+            msg['From'] = sender_email
+            msg['To'] = receiver_email
+            
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+                server.login(sender_email, password)
+                server.send_message(msg)
+            logging.info(f"Email sent: {subject}")
+        except smtplib.SMTPException as e:
+            logging.error(f"SMTP error occurred: {e}")
+            messagebox.showerror("Email Error", "Failed to send email notification.")
 
     def on_disconnect(self, mqttc, userdata, rc, properties=None):
-        print('Disconnected.. \n Return code: ' + str(rc))
+        logging.info('Disconnected.. \n Return code: ' + str(rc))
 
     def on_unsubscribed(self, mqttc, userdata, mid, granted_qos):
-        print('Unsubscribed')
+        logging.info('Unsubscribed')
 
     def update_data(self, packetId, interval, newTemp):
         # Check if there is lost transmission
         lost = (packetId - self.__lastReceived) > (interval * 1000 * 1.1)
         if (self.__lastReceived > 0 and lost):
-            print('Missing Detected!')
+            logging.warning('Missing Detected!')
             miss = self.__missing.get()
             self.__missing.set(miss + 1)
-            self.send_email_notification(
-                'Missing Data Alert',
-                f'Missing data detected. Packet ID: {packetId}'
-            )
+            try:
+                self.send_email_notification(
+                    'Missing Data Alert',
+                    f'Missing data detected. Packet ID: {packetId}'
+                )
+            except Exception as e:
+                logging.error(f"Error sending email notification: {e}")
+                messagebox.showerror("Notification Error", "Failed to send missing data alert email.")
 
         self.__lastReceived = packetId
 
         # Wild Data is not added to dataset
         if (newTemp < -40 or newTemp > 40):
-            print('Wild Detected!')
+            logging.warning('Wild Detected!')
             wild = self.__wild.get()
             self.__wild.set(wild + 1)
-            self.send_email_notification(
-                'Wild Data Alert',
-                f'Wild data detected. Temperature: {newTemp}'
-            )
+            try:
+                self.send_email_notification(
+                    'Wild Data Alert',
+                    f'Wild data detected. Temperature: {newTemp}'
+                )
+            except Exception as e:
+                logging.error(f"Error sending email notification: {e}")
+                messagebox.showerror("Notification Error", "Failed to send wild data alert email.")
             return
 
         if(len(self.__data) >= 20):
@@ -142,29 +168,51 @@ class TempClient(Tk):
             self.__lastReceived = -1
             self.__wild.set(0)
             self.__missing.set(0)
-            # Connect to Mqtt broker on specified host and port
-            self.__mqttc.connect(host='localhost', port=1883)
-            self.__mqttc.loop_start()
-            print('Starting:', self.__sensorName.get())
+            try:
+                # Connect to Mqtt broker on specified host and port
+                self.__mqttc.connect(host='localhost', port=1883)
+                self.__mqttc.loop_start()
+                logging.info('Starting: %s', self.__sensorName.get())
+            except Exception as e:
+                logging.error(f"Error connecting to MQTT broker: {e}")
+                messagebox.showerror("MQTT Connection Error", "Failed to connect to the MQTT broker.")
         else:
             self.__button_name.set('Start')
-            self.__mqttc.unsubscribe(topic=self.__sensorName.get())
-            self.__mqttc.loop_stop()
+            try:
+                self.__mqttc.unsubscribe(topic=self.__sensorName.get())
+                self.__mqttc.loop_stop()
+            except Exception as e:
+                logging.error(f"Error unsubscribing from topic: {e}")
+                messagebox.showerror("MQTT Error", "Failed to unsubscribe from the MQTT topic.")
 
     def on_connect(self, mqttc, userdata, flags, rc, properties=None):
-        print('Connected.. \n Return code: ' + str(rc))
-        mqttc.subscribe(topic=self.__sensorName.get(), qos=0)
+        logging.info('Connected.. \n Return code: %s', str(rc))
+        try:
+            mqttc.subscribe(topic=self.__sensorName.get(), qos=0)
+        except Exception as e:
+            logging.error(f"Error subscribing to topic: {e}")
+            messagebox.showerror("MQTT Subscription Error", "Failed to subscribe to the MQTT topic.")
 
     def on_message(self, mqttc, userdata, msg):
-        message = json.loads(msg.payload)
-        self.__packetId.set(message['packetId'])
-        self.__name.set(message['name'])
-        self.__temp.set(message['temp'])
-        self.__ipv4.set(message['ipv4'])
-        self.update_data(message['packetId'], message['interval'], message['temp'])
+        try:
+            message = json.loads(msg.payload)
+            self.__packetId.set(message['packetId'])
+            self.__name.set(message['name'])
+            self.__temp.set(message['temp'])
+            self.__ipv4.set(message['ipv4'])
+            self.update_data(message['packetId'], message['interval'], message['temp'])
+        except json.JSONDecodeError as e:
+            logging.error(f"JSON decode error: {e}")
+            messagebox.showerror("Message Error", "Failed to decode MQTT message.")
+        except KeyError as e:
+            logging.error(f"Key error: {e}")
+            messagebox.showerror("Message Error", "Missing expected fields in MQTT message.")
+        except Exception as e:
+            logging.error(f"Error processing MQTT message: {e}")
+            messagebox.showerror("Message Error", "Failed to process MQTT message.")
 
     def on_subscribe(self, mqttc, userdata, mid, granted_qos, properties=None):
-        print('Subscribed')
+        logging.info('Subscribed')
 
     def displayLines(self):
         lineHeight = 10
@@ -203,4 +251,5 @@ class TempClient(Tk):
 if __name__ == '__main__':
     sts = TempClient()
     sts.mainloop()
+
 
