@@ -16,7 +16,7 @@ if __name__ == '__main__':
   for script in scripts:
     print(script)
     thread = threading.Thread(target=os.system, args=[script])
-    thread.setDaemon(True)
+    thread.daemon = True
     thread.start()
     threads.append(thread)
 
