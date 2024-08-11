@@ -182,7 +182,7 @@ class TempClient(Tk):
             self.__missing.set(0)
             try:
                 # Connect to Mqtt broker on specified host and port
-                self.__mqttc.connect(host='localhost', port=1883)
+                self.__mqttc.connect(host='broker.hivemq.com', port=1883)
                 self.__mqttc.loop_start()
                 logging.info('Starting: %s', self.__sensorName.get())
             except Exception as e:

@@ -203,7 +203,7 @@ class PublisherGUI(Tk):
 
                 # Connect to MQTT broker
                 try:
-                    self.mqttc.connect(host='localhost', port=1883)
+                    self.mqttc.connect(host='broker.hivemq.com', port=1883)
                     logging.info("MQTT client connected")
                 except (socket.error, mqtt.MQTTException) as e:
                     messagebox.showinfo(title='Information', message=f'Error connecting to MQTT broker: {e}')
