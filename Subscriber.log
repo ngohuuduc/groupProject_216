@@ -1,0 +1,323 @@
+2024-08-11 13:13:10,432 - ERROR - Error connecting to MQTT broker: [Errno 111] Connection refused
+2024-08-11 13:14:42,118 - INFO - Starting: sensor1
+2024-08-11 13:14:42,346 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:14:42,455 - INFO - Subscribed
+2024-08-11 13:14:51,486 - INFO - Starting: sensor2
+2024-08-11 13:14:51,592 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:14:51,795 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:14:51,918 - INFO - Subscribed
+2024-08-11 13:14:52,809 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:14:52,823 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:14:52,930 - INFO - Subscribed
+2024-08-11 13:14:54,038 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:14:54,057 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:14:54,302 - INFO - Subscribed
+2024-08-11 13:14:54,429 - WARNING - Missing Detected!
+2024-08-11 13:14:55,289 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:14:55,403 - INFO - Subscribed
+2024-08-11 13:14:56,626 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:14:56,758 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:14:59,943 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:00,723 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:00,853 - INFO - Subscribed
+2024-08-11 13:15:00,971 - WARNING - Missing Detected!
+2024-08-11 13:15:01,199 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:01,319 - INFO - Subscribed
+2024-08-11 13:15:01,876 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:01,901 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:03,120 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:03,124 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:03,297 - INFO - Subscribed
+2024-08-11 13:15:03,479 - WARNING - Missing Detected!
+2024-08-11 13:15:04,348 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:04,406 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:04,459 - INFO - Subscribed
+2024-08-11 13:15:04,534 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:05,756 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:05,768 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:05,889 - INFO - Subscribed
+2024-08-11 13:15:05,982 - WARNING - Missing Detected!
+2024-08-11 13:15:06,765 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:06,970 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:07,253 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:07,368 - INFO - Subscribed
+2024-08-11 13:15:08,196 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:08,206 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:08,321 - INFO - Subscribed
+2024-08-11 13:15:08,491 - WARNING - Missing Detected!
+2024-08-11 13:15:09,310 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:09,414 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:09,421 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:09,531 - INFO - Subscribed
+2024-08-11 13:15:10,631 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:10,650 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:10,765 - INFO - Subscribed
+2024-08-11 13:15:11,006 - WARNING - Missing Detected!
+2024-08-11 13:15:11,830 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:11,852 - WARNING - Wild Detected!
+2024-08-11 13:15:11,858 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:11,968 - INFO - Subscribed
+2024-08-11 13:15:12,704 - INFO - Email sent: Wild Data Alert
+2024-08-11 13:15:12,759 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:13,988 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:13,993 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:14,102 - INFO - Subscribed
+2024-08-11 13:15:14,270 - WARNING - Missing Detected!
+2024-08-11 13:15:15,141 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:15,210 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:15,249 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:15,316 - INFO - Subscribed
+2024-08-11 13:15:16,466 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:16,472 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:16,584 - INFO - Subscribed
+2024-08-11 13:15:16,782 - WARNING - Missing Detected!
+2024-08-11 13:15:17,662 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:17,709 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:17,836 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:17,836 - INFO - Subscribed
+2024-08-11 13:15:19,056 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:19,087 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:19,207 - INFO - Subscribed
+2024-08-11 13:15:19,292 - WARNING - Missing Detected!
+2024-08-11 13:15:20,113 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:20,279 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:20,308 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:20,421 - INFO - Subscribed
+2024-08-11 13:15:21,502 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:21,513 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:21,625 - INFO - Subscribed
+2024-08-11 13:15:22,016 - WARNING - Missing Detected!
+2024-08-11 13:15:22,731 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:22,842 - INFO - Subscribed
+2024-08-11 13:15:22,873 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:22,971 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:24,190 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:24,210 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:24,322 - INFO - Subscribed
+2024-08-11 13:15:24,581 - WARNING - Missing Detected!
+2024-08-11 13:15:25,357 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:25,428 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:25,458 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:25,541 - INFO - Subscribed
+2024-08-11 13:15:26,689 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:26,737 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:26,856 - INFO - Subscribed
+2024-08-11 13:15:27,086 - WARNING - Missing Detected!
+2024-08-11 13:15:27,821 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:27,974 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:28,082 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:28,189 - INFO - Subscribed
+2024-08-11 13:15:29,202 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:29,204 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:29,316 - INFO - Subscribed
+2024-08-11 13:15:29,337 - WARNING - Missing Detected!
+2024-08-11 13:15:30,126 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:30,421 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:30,429 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:30,541 - INFO - Subscribed
+2024-08-11 13:15:30,690 - WARNING - Missing Detected!
+2024-08-11 13:15:31,541 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:31,645 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:31,652 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:31,768 - INFO - Subscribed
+2024-08-11 13:15:31,844 - WARNING - Missing Detected!
+2024-08-11 13:15:32,904 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:32,997 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:33,018 - INFO - Subscribed
+2024-08-11 13:15:33,125 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:33,206 - WARNING - Missing Detected!
+2024-08-11 13:15:33,991 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:34,339 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:34,361 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:34,628 - INFO - Subscribed
+2024-08-11 13:15:34,868 - WARNING - Missing Detected!
+2024-08-11 13:15:35,567 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:35,660 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:35,676 - INFO - Subscribed
+2024-08-11 13:15:35,712 - WARNING - Missing Detected!
+2024-08-11 13:15:35,732 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:36,706 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:36,955 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:36,963 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:37,073 - INFO - Subscribed
+2024-08-11 13:15:37,125 - WARNING - Missing Detected!
+2024-08-11 13:15:37,981 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:38,170 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:38,177 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:38,286 - INFO - Subscribed
+2024-08-11 13:15:38,470 - WARNING - Missing Detected!
+2024-08-11 13:15:39,248 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:39,389 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:39,396 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:39,507 - INFO - Subscribed
+2024-08-11 13:15:39,631 - WARNING - Missing Detected!
+2024-08-11 13:15:40,456 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:40,604 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:40,618 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:40,726 - INFO - Subscribed
+2024-08-11 13:15:40,729 - WARNING - Missing Detected!
+2024-08-11 13:15:41,509 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:41,828 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:41,837 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:41,953 - INFO - Subscribed
+2024-08-11 13:15:42,142 - WARNING - Missing Detected!
+2024-08-11 13:15:42,963 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:43,050 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:43,065 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:43,175 - INFO - Subscribed
+2024-08-11 13:15:43,244 - WARNING - Missing Detected!
+2024-08-11 13:15:44,181 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:44,294 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:44,308 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:44,405 - INFO - Subscribed
+2024-08-11 13:15:44,661 - WARNING - Missing Detected!
+2024-08-11 13:15:45,464 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:45,563 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:45,603 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:45,716 - INFO - Subscribed
+2024-08-11 13:15:45,754 - WARNING - Missing Detected!
+2024-08-11 13:15:46,517 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:46,793 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:46,797 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:46,909 - INFO - Subscribed
+2024-08-11 13:15:46,914 - WARNING - Missing Detected!
+2024-08-11 13:15:47,735 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:48,013 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:48,030 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:48,137 - INFO - Subscribed
+2024-08-11 13:15:48,270 - WARNING - Missing Detected!
+2024-08-11 13:15:49,107 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:49,237 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:49,244 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:49,360 - INFO - Subscribed
+2024-08-11 13:15:49,422 - WARNING - Missing Detected!
+2024-08-11 13:15:50,255 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:50,457 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:50,468 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:50,578 - INFO - Subscribed
+2024-08-11 13:15:50,782 - WARNING - Missing Detected!
+2024-08-11 13:15:51,611 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:51,688 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:51,705 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:52,007 - INFO - Subscribed
+2024-08-11 13:15:52,019 - WARNING - Missing Detected!
+2024-08-11 13:15:52,823 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:52,927 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:52,954 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:53,068 - INFO - Subscribed
+2024-08-11 13:15:53,286 - WARNING - Missing Detected!
+2024-08-11 13:15:54,166 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:54,249 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:54,274 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:54,358 - INFO - Subscribed
+2024-08-11 13:15:54,442 - WARNING - Missing Detected!
+2024-08-11 13:15:55,362 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:55,494 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:55,508 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:55,619 - INFO - Subscribed
+2024-08-11 13:15:55,793 - WARNING - Missing Detected!
+2024-08-11 13:15:56,642 - INFO - Email sent: Missing Data Alert
+2024-08-11 13:15:56,724 - INFO - Connected.. 
+ Return code: Success
+2024-08-11 13:15:56,747 - INFO - Disconnected.. 
+ Return code: Session taken over
+2024-08-11 13:15:56,840 - INFO - Subscribed
+2024-08-11 13:15:56,960 - WARNING - Missing Detected!
+2024-08-11 13:15:57,796 - INFO - Email sent: Missing Data Alert
