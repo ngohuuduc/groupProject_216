@@ -9,6 +9,7 @@ import time
 import sys
 import paho.mqtt.client as mqtt
 import logging
+import socket
 
 from group_5_data_generator import SensorSimulator
 
@@ -184,18 +185,26 @@ class PublisherGUI(Tk):
 
                 # Validate delta value
                 parsedDelta = float(self.__delta.get())
-                if(parsedDelta < -1 or parsedDelta > 1):
+                if parsedDelta < -1 or parsedDelta > 1:
                     messagebox.showinfo(title='Information', message="Delta must be from -1 to 1")
                     logging.warning("Delta value out of range: %s", parsedDelta)
                     return
 
-                if (parsedMaxCycle <= parsedMinCycle):
+                if parsedMaxCycle <= parsedMinCycle:
                     messagebox.showinfo(title='Information', message="Max cycle must be greater than min cycle")
                     logging.warning("Max cycle not greater than min cycle: Min %d, Max %d", parsedMinCycle, parsedMaxCycle)
                     return
 
-                self.mqttc.connect(host='localhost', port=1883)
-                logging.info("MQTT client connected")
+                # Connect to MQTT broker
+                try:
+                    self.mqttc.connect(host='localhost', port=1883)
+                    logging.info("MQTT client connected")
+                except (socket.error, mqtt.MQTTException) as e:
+                    messagebox.showinfo(title='Information', message=f'Error connecting to MQTT broker: {e}')
+                    logging.error("MQTT connection error: %s", e)
+                    return
+
+                # Start data publishing thread
                 thread = threading.Thread(
                     target=self.run,
                     args=[parsedBase, parsedMin, parsedMax, parsedDelta, parsedMinStep, parsedMaxStep, parsedMinCycle, parsedMaxCycle, parsedName, parsedInterval])
@@ -258,6 +267,14 @@ class PublisherGUI(Tk):
                 self.mqttc.disconnect()
                 logging.info("MQTT client disconnected due to exit")
                 sys.exit()
+            except mqtt.MQTTException as e:
+                messagebox.showinfo(title='Information', message=f'Error publishing message: {e}')
+                logging.error("MQTT publish error: %s", e)
+                break
+            except socket.error as e:
+                messagebox.showinfo(title='Information', message=f'Network error: {e}')
+                logging.error("Network error: %s", e)
+                break
 
     def on_connect(self, mqttc, userdata, flags, rc):
         logging.info('Connected to MQTT broker. Return code: %s', rc)
@@ -272,13 +289,23 @@ class PublisherGUI(Tk):
         logging.info('Published message. MID: %s, Reason: %s', mid, reason)
 
     def publish(self, topic, payload, qos=0):
-        self.mqttc.publish(topic=topic, payload=payload, qos=qos)
-        logging.info('Published message to topic: %s', topic)
+        try:
+            self.mqttc.publish(topic=topic, payload=payload, qos=qos)
+            logging.info('Published message to topic: %s', topic)
+        except mqtt.MQTTException as e:
+            logging.error("MQTT publish error: %s", e)
+        except socket.error as e:
+            logging.error("Network error: %s", e)
         return
 
     def disconnect(self):
-        self.mqttc.disconnect()
-        logging.info('MQTT client disconnected')
+        try:
+            self.mqttc.disconnect()
+            logging.info('MQTT client disconnected')
+        except mqtt.MQTTException as e:
+            logging.error("MQTT disconnection error: %s", e)
+        except socket.error as e:
+            logging.error("Network error during disconnection: %s", e)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -288,6 +315,7 @@ if __name__ == '__main__':
     rmPub.geometry("400x300")
     rmPub.minsize(width=450, height=400)
     rmPub.mainloop()
+
 
 
 
