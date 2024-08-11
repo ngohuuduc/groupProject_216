@@ -10,6 +10,8 @@ import time
 import os
 from dotenv import load_dotenv
 import logging
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 load_dotenv()
 
@@ -19,7 +21,10 @@ logging.basicConfig(level=logging.DEBUG,
                     handlers=[
                         logging.StreamHandler(),  # Logs to console
                         logging.FileHandler("Subscriber.log")  # Logs to file
+                        
                     ])
+logging.getLogger('matplotlib').setLevel(logging.WARNING)
+logging.getLogger('PIL').setLevel(logging.WARNING)
 
 class TempClient(Tk):
     def __init__(self):
@@ -105,16 +110,14 @@ class TempClient(Tk):
             self.__data.pop(0)
 
         self.__data.append(newTemp)
-
-        # Method to Display Rectangles and Lines
-        self.canv.delete('all')
-        self.displayLines()
-        self.displayData()
+        self.update_plot()
 
     def create_styles(self, parent=None):
         style = Style()
         style.configure('TFrame', background='#c8e6d3')
         style.configure('TLabel', background='#c8e6d3')
+        style.configure('TCombobox', font=('Arial', 14))
+        style.configure('TButton', font=('Arial', 14))
 
     def create_vars(self):
         self.__data = []
@@ -132,32 +135,41 @@ class TempClient(Tk):
         self.__sensors_name = ["sensor1", "sensor2", "sensor3"]
 
     def initUI(self):
-        Canvas(width=860, height=280).pack()
+        Canvas(width=1060, height=680).pack()
         container = Frame(self, padding=(5, 5))
         container.place(relx=0.015, rely=0.02, relheight=0.96, relwidth=0.97)
-        Label(container, text='Temperature Client', font='Arial 12 bold').place(relx=0.33, height=30)
-        Label(container, text='PacketID: ').place(relx=0.7, rely=0.15)
-        Label(container, textvariable=self.__packetId).place(relx=0.85, rely=0.15)
-        Label(container, text='Name: ').place(relx=0.7, rely=0.25)
-        Label(container, textvariable=self.__name).place(relx=0.85, rely=0.25)
-        Label(container, text='IPv4: ').place(relx=0.7, rely=0.35)
-        Label(container, textvariable=self.__ipv4).place(relx=0.85, rely=0.35)
-        Label(container, text='Temperature: ').place(relx=0.7, rely=0.45)
-        Label(container, textvariable=self.__temp).place(relx=0.85, rely=0.45)
-        Label(container, text='Wild Data: ').place(relx=0.7, rely=0.55)
-        Label(container, textvariable=self.__wild).place(relx=0.85, rely=0.55)
-        Label(container, text='Missing: ').place(relx=0.7, rely=0.65)
-        Label(container, textvariable=self.__missing).place(relx=0.85, rely=0.65)
-        topicOptions = Combobox(container, values=self.__sensors_name, textvariable=self.__sensorName, width=10)
-        topicOptions.place(relx=0.7, rely=0.85)
+        Label(container, text='Temperature Client', font='Arial 16 bold').place(relx=0.33, height=30)
+        Label(container, text='PacketID: ', font='Arial 14').place(relx=0.7, rely=0.15)
+        Label(container, textvariable=self.__packetId, font='Arial 14').place(relx=0.85, rely=0.15)
+        Label(container, text='Name: ', font='Arial 14').place(relx=0.7, rely=0.25)
+        Label(container, textvariable=self.__name, font='Arial 14').place(relx=0.85, rely=0.25)
+        Label(container, text='IPv4: ', font='Arial 14').place(relx=0.7, rely=0.35)
+        Label(container, textvariable=self.__ipv4, font='Arial 14').place(relx=0.85, rely=0.35)
+        Label(container, text='Temperature: ', font='Arial 14').place(relx=0.7, rely=0.45)
+        Label(container, textvariable=self.__temp, font='Arial 14').place(relx=0.85, rely=0.45)
+        Label(container, text='Wild Data: ', font='Arial 14').place(relx=0.7, rely=0.55)
+        Label(container, textvariable=self.__wild, font='Arial 14').place(relx=0.85, rely=0.55)
+        Label(container, text='Missing: ', font='Arial 14').place(relx=0.7, rely=0.65)
+        Label(container, textvariable=self.__missing, font='Arial 14').place(relx=0.85, rely=0.65)
+        topicOptions = Combobox(container, values=self.__sensors_name, textvariable=self.__sensorName, width=15, style='TCombobox')
+        topicOptions.place(relx=0.7, rely=0.82)
         topicOptions.current(0)
-        self.startButton = Button(container, textvariable=self.__button_name, command=self.btn_on_click)
-        self.startButton.place(relx=0.83, rely=0.82)
-        # Initialize Canvas
-        self.canv = Canvas(self)
-        self.canv.place(relx=0.05, rely=0.24, width=500, height=180)
 
-        # Initialize Start Value
+        self.startButton = Button(container, textvariable=self.__button_name, style='TButton', command=self.btn_on_click)
+        self.startButton.place(relx=0.83, rely=0.82)
+
+
+        # Initialize Matplotlib Figure
+        self.fig, self.ax = plt.subplots(figsize=(15, 10))
+        self.ax.set_title("Temperature Data")
+        self.ax.set_xlabel("Data Points")
+        self.ax.set_ylabel("Temperature (°C)")
+        self.line, = self.ax.plot([], [], 'r-')
+
+        # Embed the plot in the Tkinter window
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self)
+        self.canvas.get_tk_widget().place(relx=0.05, rely=0.24, width=650, height=400)
+
         self.create_styles()
 
     def btn_on_click(self):
@@ -201,55 +213,30 @@ class TempClient(Tk):
             self.__temp.set(message['temp'])
             self.__ipv4.set(message['ipv4'])
             self.update_data(message['packetId'], message['interval'], message['temp'])
-        except json.JSONDecodeError as e:
-            logging.error(f"JSON decode error: {e}")
-            messagebox.showerror("Message Error", "Failed to decode MQTT message.")
+        except json.JSONDecodeError:
+            logging.error('JSON Decode Error: Unable to decode the message payload.')
+            messagebox.showerror("Data Error", "Failed to decode the received data.")
         except KeyError as e:
-            logging.error(f"Key error: {e}")
-            messagebox.showerror("Message Error", "Missing expected fields in MQTT message.")
-        except Exception as e:
-            logging.error(f"Error processing MQTT message: {e}")
-            messagebox.showerror("Message Error", "Failed to process MQTT message.")
+            logging.error(f"Missing key in JSON data: {e}")
+            messagebox.showerror("Data Error", f"Received data is missing key: {e}")
 
     def on_subscribe(self, mqttc, userdata, mid, granted_qos, properties=None):
         logging.info('Subscribed')
 
-    def displayLines(self):
-        lineHeight = 10
-        textDisplay = 22
-        for _ in range(4):
-            self.canv.create_text(25, lineHeight, anchor=W, font='Arial 7', text=textDisplay)
-            self.canv.create_line(45, lineHeight, 65, lineHeight)
-            self.canv.create_line(50, lineHeight+20, 65, lineHeight+20)
-            lineHeight += 40
-            textDisplay -= 1
+    def update_plot(self):
+        # Update plot with new data
+        self.line.set_xdata(range(len(self.__data)))
+        self.line.set_ydata(self.__data)
+        self.ax.relim()
+        self.ax.autoscale_view()
+        self.fig.subplots_adjust(left=0.1, right=0.95, top=0.9, bottom=0.2)
+        self.canvas.draw()
 
-        self.canv.create_text(25, lineHeight, anchor=W, font='Arial 7', text=textDisplay)
-        self.canv.create_line(45, lineHeight, 65, lineHeight)
-
-    def displayData(self):
-        spacing = 70
-        prevY = 0
-        data_count = len(self.__data)
-        for i in range(data_count):
-            full = 170 - 10
-            relative = (self.__data[i] - 18) / (22 - 18)
-            height = 170 - (relative * full)
-            
-            # Line - No line if data is less than 2 counts
-            if(i > 0):
-                self.canv.create_line(spacing, prevY, spacing + 20, height)
-            
-            spacing += 20
-            prevY = height
-
-    def simulate_missing_data(self):
-        # Function to occasionally skip blocks of transmissions
-        if randint(0, 10) > 7:  # Roughly 30% chance to skip
-            time.sleep(2)  # Simulate delay in receiving data
+    def simulate_missing_data(self, packetId):
+        # Simulate occasional missing data by skipping data points
+        if randint(0, 10) > 7:
+            time.sleep(randint(1, 3))
 
 if __name__ == '__main__':
-    sts = TempClient()
-    sts.mainloop()
-
-
+    tempClient = TempClient()
+    tempClient.mainloop()
