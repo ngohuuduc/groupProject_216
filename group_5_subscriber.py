@@ -67,8 +67,8 @@ class TempClient(Tk):
             logging.error(f"SMTP error occurred: {e}")
             messagebox.showerror("Email Error", "Failed to send email notification.")
 
-    def on_disconnect(self, mqttc, userdata, rc, properties=None):
-        logging.info('Disconnected.. \n Return code: ' + str(rc))
+    def on_disconnect(self, client, userdata, flags, reason, properties):
+        logging.info('Disconnected.. \n Return code: ' + str(reason))
 
     def on_unsubscribed(self, mqttc, userdata, mid, granted_qos):
         logging.info('Unsubscribed')

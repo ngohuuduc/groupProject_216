@@ -27,6 +27,7 @@ class PublisherGUI(Tk):
         "Play Room": "123.89.46.65",
         "Laundry": "123.89.46.89"
     }
+    
 
     def __init__(self, topic_name):
         super().__init__()
@@ -38,10 +39,15 @@ class PublisherGUI(Tk):
         self.create_ui()
         self.configureResizable()
 
+        def generate_client_id():
+            timestamp = int(time.time())
+            random_value = random.randint(1000, 9999)
+            return f'pub_demo_{timestamp}_{random_value}'
+
         # Create Mqtt client
         self.mqttc = mqtt.Client(
             mqtt.CallbackAPIVersion.VERSION2,
-            client_id='pub_demo',
+            client_id= generate_client_id(),
             protocol=mqtt.MQTTv5
         )
         # Register callbacks
@@ -279,8 +285,8 @@ class PublisherGUI(Tk):
     def on_connect(self, mqttc, userdata, flags, rc):
         logging.info('Connected to MQTT broker. Return code: %s', rc)
 
-    def on_disconnect(self, mqttc, userdata, rc):
-        logging.info('Disconnected from MQTT broker. Return code: %s', rc)
+    def on_disconnect(self, client, userdata, flags, reason, properties):
+        logging.info('Disconnected from MQTT broker. Return code: %s', reason)
 
     def on_message(self, mqttc, userdata, msg):
         logging.info('Received message. Topic: %s, Message: %s', msg.topic, msg.payload)
